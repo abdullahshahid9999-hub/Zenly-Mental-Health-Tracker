@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zenly — Feel Better, Every Day</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* =====================
+       CSS CUSTOM PROPERTIES
+    ===================== */
+    :root {
+      --mocha: #A5856E;
+      --mocha-dark: #8a6d59;
+      --blue: #A0D4E0;
+      --blue-light: #d4eef5;
+      --cream: #F2F0EA;
+      --cream-dark: #e8e4da;
+      --dark: #2c2420;
+      --text: #3d3330;
+      --text-muted: #7a6d68;
+      --white: #ffffff;
+
+      --font-head: 'Inter', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(165, 133, 110, 0.12);
+      --shadow-hover: 0 8px 32px rgba(165, 133, 110, 0.22);
+
+      --transition: 0.3s ease;
+    }
+
+    /* =====================
+       RESET & BASE
+    ===================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* =====================
+       TYPOGRAPHY
+    ===================== */
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      line-height: 1.2;
+      color: var(--dark);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }
+    h4 { font-size: 1rem; font-weight: 600; }
+
+    p {
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* =====================
+       LAYOUT UTILITIES
+    ===================== */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      max-width: 520px;
+      margin-bottom: 48px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-center .section-subtitle {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* =====================
+       BUTTONS
+    ===================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--mocha);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--mocha-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--mocha);
+      border: 2px solid var(--mocha);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--mocha);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* =====================
+       HEADER / NAV
+    ===================== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(242, 240, 234, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo span {
+      color: var(--mocha);
+    }
+
+    .nav-logo .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--mocha);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--mocha);
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: var(--dark);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Nav Menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background-color: var(--cream);
+      border-top: 1px solid var(--cream-dark);
+      padding: 16px 20px 24px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--cream-dark);
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--mocha);
+    }
+
+    .mobile-menu .btn {
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    /* =====================
+       HERO SECTION
+    ===================== */
+    .hero {
+      padding: 80px 0 60px;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--blue-light) 100%);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--blue-light);
+      border: 1px solid var(--blue);
+      color: var(--text);
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--mocha);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero-title {
+      margin-bottom: 20px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--mocha);
+      position: relative;
+    }
+
+    .hero-title em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--blue);
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      margin-bottom: 32px;
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-mockup {
+      width: 260px;
+      background: var(--white);
+      border-radius: 36px;
+      padding: 20px 16px;
+      box-shadow: 0 24px 64px rgba(165, 133, 110, 0.25);
+      position: relative;
+      border: 6px solid var(--dark);
+    }
+
+    .phone-notch {
+      width: 80px;
+      height: 24px;
+      background: var(--dark);
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto 16px;
+    }
+
+    .phone-screen {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 400px;
+    }
+
+    .app-header-mock {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .app-header-mock .greeting {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .app-header-mock .avatar {
+      width: 28px;
+      height: 28px;
+      background: var(--mocha);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: white;
+    }
+
+    .mood-card-mock {
+      background: linear-gradient(135deg, var(--mocha) 0%, #c4a08a 100%);
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .mood-card-mock .label {
+      font-size: 0.65rem;
+      opacity: 0.8;
+      margin-bottom: 4px;
+      font-family: var(--font-head);
+    }
+
+    .mood-card-mock .value {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .mood-card-mock .emoji-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mood-card-mock .emoji-btn-mock {
+      background: rgba(255,255,255,0.25);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .mini-card {
+      background: white;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .mini-card .icon {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .mini-card .label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      font-family: var(--font-head);
+    }
+
+    .mini-card .val {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: var(--font-head);
+      color: var(--dark);
+    }
+
+    .progress-bar-mock {
+      background: white;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .progress-bar-mock .label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: var(--font-head);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: var(--cream-dark);
+      border-radius: 4px;
+      height: 6px;
+    }
+
+    .progress-fill {
+      background: var(--blue);
+      height: 6px;
+      border-radius: 4px;
+      width: 65%;
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 8px 12px;
+      box-shadow: var(--shadow);
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .floating-badge.top-right {
+      top: 60px;
+      right: -20px;
+    }
+
+    .floating-badge.bottom-left {
+      bottom: 80px;
+      left: -24px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+    }
+
+    /* =====================
+       FEATURES SECTION
+    ===================== */
+    .features {
+      background-color: var(--white);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--blue);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 8px;
+    }
+
+    /* =====================
+       HOW IT WORKS
+    ===================== */
+    .how-it-works {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--blue-light) 100%);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: var(--mocha);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .step-content h3 {
+      margin-bottom: 8px;
+    }
+
+    /* =====================
+       MOOD TRACKER (JS SECTION)
+    ===================== */
+    .mood-tracker {
+      background: var(--white);
+    }
+
+    .mood-box {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .mood-box h3 {
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
+    .mood-box p {
+      margin-bottom: 28px;
+    }
+
+    .mood-emojis {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .mood-btn {
+      background: var(--white);
+      border: 2px solid var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 1.8rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 80px;
+    }
+
+    .mood-btn span.label {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .mood-btn:hover {
+      border-color: var(--mocha);
+      transform: scale(1.08);
+      box-shadow: var(--shadow);
+    }
+
+    .mood-btn.selected {
+      border-color: var(--mocha);
+      background: var(--mocha);
+    }
+
+    .mood-btn.selected span.label {
+      color: white;
+    }
+
+    .mood-response {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mood-message {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      color: var(--dark);
+      font-weight: 500;
+      display: none;
+      text-align: left;
+      width: 100%;
+    }
+
+    .mood-message.visible {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =====================
+       TESTIMONIALS
+    ===================== */
+    .testimonials {
+      background-color: var(--cream);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stars {
+      color: var(--mocha);
+      font-size: 1rem;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .author-info .name {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+
+    .author-info .role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* =====================
+       FAQ SECTION
+    ===================== */
+    .faq {
+      background: var(--white);
+    }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 0;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+      transition: color var(--transition);
+    }
+
+    .faq-question:hover {
+      color: var(--mocha);
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      color: var(--mocha);
+    }
+
+    .faq-question.open .faq-icon {
+      background: var(--mocha);
+      color: white;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-answer.open {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+
+    .faq-answer p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    /* =====================
+       CTA BANNER
+    ===================== */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--mocha) 0%, #8a6d59 100%);
+      padding: 72px 0;
+      text-align: center;
+    }
+
+    .cta-banner h2 {
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-banner .btn-primary {
+      background: white;
+      color: var(--mocha);
+    }
+
+    .cta-banner .btn-primary:hover {
+      background: var(--cream);
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.7);
+      padding: 48px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .nav-logo {
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul a {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      transition: color var(--transition);
+    }
+
+    .footer-col ul a:hover {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--mocha);
+    }
+
+    /* =====================
+       SCROLL TO TOP
+    ===================== */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: var(--mocha);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 99;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .scroll-top:hover {
+      background: var(--mocha-dark);
+      transform: translateY(-3px);
+    }
+
+    /* =====================
+       MEDIA QUERIES
+    ===================== */
+
+    /* Tablet: 768px */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: inline-flex;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    /* Desktop: 1024px */
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 2.5fr 1fr 1fr 1fr;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <div class="container">
+      <nav aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="Zenly Home">
+          <div class="logo-icon" aria-hidden="true">🌿</div>
+          Zen<span>ly</span>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#mood">Mood Check</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <button class="btn btn-primary nav-cta" aria-label="Get started with Zenly">
+          Get Started Free
+        </button>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#how-it-works" class="mobile-link">How It Works</a>
+      <a href="#mood" class="mobile-link">Mood Check</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <button class="btn btn-primary">Get Started Free</button>
+    </nav>
+  </header>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-grid">
+
+          <div class="hero-content">
+            <div class="hero-badge" aria-label="New feature announcement">
+              <span class="dot" aria-hidden="true"></span>
+              Now with AI-powered insights
+            </div>
+
+            <h1 class="hero-title" id="hero-heading">
+              Feel Better,<br /><em>Every Single Day</em>
+            </h1>
+
+            <p class="hero-desc">
+              Zenly helps you track your mood, sleep, and habits — giving you clarity about your mental wellness without the overwhelm.
+            </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary">Start for Free ↗</button>
+              <button class="btn btn-outline">See How It Works</button>
+            </div>
+
+            <div class="hero-stats" role="list" aria-label="Key statistics">
+              <div class="stat" role="listitem">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Active Users</span>
+              </div>
+              <div class="stat" role="listitem">
+                <span class="stat-number">4.9★</span>
+                <span class="stat-label">User Rating</span>
+              </div>
+              <div class="stat" role="listitem">
+                <span class="stat-number">92%</span>
+                <span class="stat-label">Feel Better in 2 Weeks</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Mockup -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="phone-mockup" role="img" aria-label="Zenly app preview">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="app-header-mock">
+                  <div class="greeting">Good morning, Sara 👋</div>
+                  <div class="avatar">S</div>
+                </div>
+                <div class="mood-card-mock">
+                  <div class="label">How are you feeling?</div>
+                  <div class="value">Track your mood</div>
+                  <div class="emoji-row">
+                    <div class="emoji-btn-mock">😊</div>
+                    <div class="emoji-btn-mock">😐</div>
+                    <div class="emoji-btn-mock">😢</div>
+                  </div>
+                </div>
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <div class="icon">💧</div>
+                    <div class="val">6 / 8</div>
+                    <div class="label">Glasses of water</div>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon">🌙</div>
+                    <div class="val">7.2 hrs</div>
+                    <div class="label">Sleep last night</div>
+                  </div>
+                </div>
+                <div class="progress-bar-mock">
+                  <div class="label">Daily Wellness Goal — 65%</div>
+                  <div class="progress-track">
+                    <div class="progress-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-badge top-right">
+              <span class="badge-dot"></span>
+              Mood logged ✓
+            </div>
+            <div class="floating-badge bottom-left">
+              🏆 7-day streak!
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features section" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="text-center">
+          <p class="section-label">What You Get</p>
+          <h2 class="section-title" id="features-heading">Everything Your Wellness Needs</h2>
+          <p class="section-subtitle">Four simple tools that work together to give you a complete picture of how you're actually doing.</p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon" style="background-color: #fef3e2;">😊</div>
+            <h3>Mood Tracking</h3>
+            <p>Log how you feel in seconds. See patterns across days and weeks to understand what affects your mood most.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" style="background-color: var(--blue-light);">🌙</div>
+            <h3>Sleep Logger</h3>
+            <p>Track your sleep quality and hours. Get insights on what time you sleep best and what's disrupting your rest.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" style="background-color: #e8f5e9;">💧</div>
+            <h3>Hydration Reminders</h3>
+            <p>Never forget to drink water. Set your daily goal and get gentle nudges throughout the day to stay hydrated.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" style="background-color: #fce4ec;">🏃</div>
+            <h3>Habit Builder</h3>
+            <p>Build small, consistent habits with streak tracking and gentle accountability — no guilt, just progress.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works section" id="how-it-works" aria-labelledby="hiw-heading">
+      <div class="container">
+        <div class="text-center">
+          <p class="section-label">The Process</p>
+          <h2 class="section-title" id="hiw-heading">Simple. Honest. Effective.</h2>
+          <p class="section-subtitle">Three steps that take less than 5 minutes a day — but add up to real change over time.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+            <div class="step-content">
+              <h3>Track Daily</h3>
+              <p>Spend 2 minutes logging your mood, sleep, and water. No essays — just quick, honest check-ins.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+            <div class="step-content">
+              <h3>See Your Patterns</h3>
+              <p>Zenly shows you weekly trends — when you feel best, what habits improve your mood, where you're slipping.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+            <div class="step-content">
+              <h3>Improve Gradually</h3>
+              <p>Small, data-backed suggestions. Not a 30-day program — just one honest insight at a time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOOD TRACKER (JavaScript interaction) -->
+    <section class="mood-tracker section" id="mood" aria-labelledby="mood-heading">
+      <div class="container">
+        <div class="text-center">
+          <p class="section-label">Try It Now</p>
+          <h2 class="section-title" id="mood-heading">How Are You Feeling Today?</h2>
+          <p class="section-subtitle">Get a quick wellness tip based on your current mood.</p>
+        </div>
+
+        <div class="mood-box">
+          <h3>Quick Mood Check</h3>
+          <p>Pick the emoji that best describes right now</p>
+
+          <div class="mood-emojis" role="group" aria-label="Mood selection">
+            <button class="mood-btn" data-mood="great" aria-label="Feeling great">
+              😊
+              <span class="label">Great</span>
+            </button>
+            <button class="mood-btn" data-mood="okay" aria-label="Feeling okay">
+              😐
+              <span class="label">Okay</span>
+            </button>
+            <button class="mood-btn" data-mood="tired" aria-label="Feeling tired">
+              😴
+              <span class="label">Tired</span>
+            </button>
+            <button class="mood-btn" data-mood="sad" aria-label="Feeling sad">
+              😢
+              <span class="label">Sad</span>
+            </button>
+            <button class="mood-btn" data-mood="stressed" aria-label="Feeling stressed">
+              😤
+              <span class="label">Stressed</span>
+            </button>
+          </div>
+
+          <div class="mood-response" aria-live="polite" aria-atomic="true">
+            <div class="mood-message" id="moodMessage" role="status"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials section" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="text-center">
+          <p class="section-label">Real People</p>
+          <h2 class="section-title" id="testimonials-heading">What Users Are Saying</h2>
+          <p class="section-subtitle">Not influencers. Just people who actually use Zenly every day.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-text">"I never thought a wellness app would actually stick. Zenly's check-ins take 2 minutes and after 3 weeks I can genuinely see why some days are harder than others."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: var(--mocha);" aria-hidden="true">AK</div>
+              <div class="author-info">
+                <div class="name">Ayesha K.</div>
+                <div class="role">Student, Lahore</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-text">"The sleep tracker showed me I was only getting 5.5 hours on average. I thought I was getting 7. That one data point changed how I manage my evenings."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: var(--blue);" aria-hidden="true">MR</div>
+              <div class="author-info">
+                <div class="name">Marcus R.</div>
+                <div class="role">Freelancer, Dubai</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="stars" aria-label="4 out of 5 stars">★★★★☆</div>
+            <p class="testimonial-text">"No toxic positivity. No 'you got this!' messages. Just honest data about my habits. Exactly what I needed. The streak system keeps me coming back."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: #6b8e6b;" aria-hidden="true">SR</div>
+              <div class="author-info">
+                <div class="name">Sara R.</div>
+                <div class="role">Teacher, Karachi</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="text-center">
+          <p class="section-label">Questions</p>
+          <h2 class="section-title" id="faq-heading">Common Questions</h2>
+        </div>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1">
+              Is Zenly free to use?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-ans-1" role="region">
+              <p>Yes. The core features — mood tracking, sleep logging, and water reminders — are completely free. A premium plan with advanced analytics is available for users who want deeper insights.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2">
+              Is my data private?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-ans-2" role="region">
+              <p>Your data is yours. We do not sell it, share it, or use it for advertising. Everything is encrypted and stored securely. You can delete your account and all data at any time.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3">
+              How long does daily tracking take?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-ans-3" role="region">
+              <p>Less than 2 minutes for a full check-in. We designed it specifically to be the shortest effective habit — long enough to be meaningful, short enough to actually do every day.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4">
+              Is this a replacement for therapy?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-ans-4" role="region">
+              <p>No, and we are clear about that. Zenly is a self-awareness tool, not a clinical product. If you are dealing with serious mental health challenges, please speak to a qualified professional. Zenly can complement that process, not replace it.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner" aria-labelledby="cta-heading">
+      <div class="container">
+        <h2 id="cta-heading">Your mental wellness starts with one check-in.</h2>
+        <p>No credit card. No overwhelming onboarding. Just open the app and start.</p>
+        <button class="btn btn-primary">Get Zenly — It's Free</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="logo-icon" aria-hidden="true">🌿</div>
+            Zen<span style="color: var(--blue);">ly</span>
+          </div>
+          <p>A simple, honest tool to help you understand your mental wellness — one day at a time.</p>
+        </div>
+
+        <nav class="footer-col" aria-label="Product links">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#mood">Mood Tracker</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="Company links">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-col" aria-label="Legal links">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Zenly. Built with care for people who care about themselves.</p>
+        <div class="social-links" aria-label="Social media links">
+          <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Scroll back to top">↑</button>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    // ── 1. HAMBURGER MENU ──────────────────────────────────
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when a link is clicked
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── 2. MOOD TRACKER ────────────────────────────────────
+    const moodMessages = {
+      great: "🌟 That's great to hear! Use this energy — tackle something you've been putting off, or do something kind for someone around you.",
+      okay:  "😌 'Okay' is perfectly valid. Drink a glass of water, take 5 deep breaths, and give yourself credit for showing up today.",
+      tired: "😴 Your body is sending a signal. If you can, rest. If not, reduce screen time for the next hour and take a short walk.",
+      sad:   "💙 It's okay to feel sad. You don't have to fix it right now. Reach out to someone you trust, or simply rest without judgment.",
+      stressed: "🌿 Stress is information, not a verdict. Write down the one thing causing the most stress — often naming it reduces its power."
+    };
+
+    const moodBtns = document.querySelectorAll('.mood-btn');
+    const moodMessage = document.getElementById('moodMessage');
+
+    moodBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Clear previous selection
+        moodBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+
+        // Show message
+        const mood = btn.dataset.mood;
+        moodMessage.textContent = moodMessages[mood];
+        moodMessage.classList.add('visible');
+      });
+    });
+
+    // ── 3. FAQ ACCORDION ───────────────────────────────────
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const isOpen = question.classList.contains('open');
+        const answerId = question.getAttribute('aria-controls');
+        const answer = document.getElementById(answerId);
+
+        // Close all
+        faqQuestions.forEach(q => {
+          q.classList.remove('open');
+          q.setAttribute('aria-expanded', 'false');
+          const aId = q.getAttribute('aria-controls');
+          document.getElementById(aId).classList.remove('open');
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          question.classList.add('open');
+          question.setAttribute('aria-expanded', 'true');
+          answer.classList.add('open');
+        }
+      });
+    });
+
+    // ── 4. SCROLL TO TOP ───────────────────────────────────
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── 5. SMOOTH SCROLL for anchor links ─────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
